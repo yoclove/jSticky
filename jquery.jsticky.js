@@ -53,6 +53,12 @@
           stopper        = settings.stopper,
           $window        = $(window);
 
+
+      function initStuts(){
+        thisHeight     = $this.outerHeight(),
+        placeholder    = $('.sticky-placeholder').width(thisWidth).height(thisHeight).addClass('sticky-placeholder');
+        pushPoint      = $this.offset().top - topSpacing;
+      }
       function stickyScroll() {
 
         var windowTop  = $window.scrollTop(); // Check window's scroll position
@@ -60,6 +66,7 @@
         if ( hasStopper && typeof stopper === 'string' ) {
           var stopperTop = $(stopper).offset().top,
               stopPoint  = (stopperTop - thisHeight) - topSpacing;
+              console.log(stopPoint);
         } else if (hasStopper && typeof stopper === 'number') {
           var stopPoint = stopper;
         }
@@ -92,7 +99,15 @@
         }
       };
 
-      $window.bind("scroll", stickyScroll);
+      $window.bind("resize", function(){
+        initStuts();
+        $window.scroll();
+      });
+
+      $window.bind("scroll", function(){
+        stickyScroll();
+      }).scroll();
+
     });
   };
 })(jQuery);

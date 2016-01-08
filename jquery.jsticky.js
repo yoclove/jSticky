@@ -99,12 +99,12 @@
         }
       };
 
-      $window.bind("resize", function(){
+      $window.on("resize", function(){
         initStuts();
         $window.scroll();
       });
 
-      $window.bind("scroll", function(){
+      $window.on("scroll", function(){
         stickyScroll();
       }).scroll();
 
